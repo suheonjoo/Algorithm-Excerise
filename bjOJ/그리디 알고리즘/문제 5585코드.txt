@@ -1,0 +1,47 @@
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Main{      //파일 이름과 같아야 함
+    public static void main(String[] args){
+        
+        Scanner in = new Scanner(System.in);
+        int N, won=0;
+        int cnt=0;
+
+        won = in.nextInt();
+        N= 1000-won;
+
+        while(N>0){
+            if(N>=500){
+                N -=500;
+                cnt++;
+            }else if(N>=100){
+                N -=100;
+                cnt++;
+            }else if(N>=50){
+                N -=50;
+                cnt++;
+            }
+            else if(N>=10){
+                N-=10;
+                cnt++;
+            }
+            else if(N>=5){
+                N -=5;
+                cnt++;
+            }else if(N>=1){
+                N -=1;
+                cnt++;
+            }
+
+
+        }
+
+        
+
+        System.out.println(cnt);
+
+    }
+    
+}

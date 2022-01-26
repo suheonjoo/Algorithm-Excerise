@@ -1,0 +1,32 @@
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Main{      //파일 이름과 같아야 함
+    public static void main(String[] args){
+        Scanner in = new Scanner(System.in);
+
+        int N = in.nextInt();
+
+        int[] arr= new int[N];
+
+        for(int i=0; i<N;i++){
+            arr[i]=in.nextInt();
+        }
+
+        Arrays.sort(arr);
+
+        int prev= 0;    //이전까지 대기시간 총합
+        int sum =0;         //대기시간 총합
+
+        for(int i=0;i<N;i++){   
+            sum +=prev +arr[i];
+            //현재 대기시간 총합을 먼저 계산하고
+            prev += arr[i];
+            //다음 사람이 기다리는 시간을 계산해준다
+
+        }
+        System.out.println(sum);
+
+    }
+    
+}

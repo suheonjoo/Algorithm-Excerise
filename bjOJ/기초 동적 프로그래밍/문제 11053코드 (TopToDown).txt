@@ -1,0 +1,57 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+
+public class Main{      //파일 이름과 같아야 함
+
+   static int[] seq;
+   static Integer[] dp;
+          
+    
+    public static void main(String[] args) throws IOException{
+
+        Scanner in = new Scanner(System.in);
+        
+        int N = in.nextInt();
+
+        seq=new int[N];
+        dp= new Integer[N];
+
+        //seq배열에 입력값 입력
+        for(int i=0;i<N;i++){
+            seq[i]=in.nextInt();
+        }
+
+        //0~N-1까지 모든 부분 수열들을 탐색
+        for(int i=0;i<N;i++){
+            LIS(i);
+        }
+
+        int max = dp[0];// 최대값을 찾기 위한 초기 설정
+        for(int i=1;i<N;i++){   //배열 순회하면서 최대값 갱신
+            max= Math.max(max,dp[i]);
+        }
+        System.out.println(max);
+        
+    }
+
+    static int LIS(int N){  //N값에 대해서 
+        if(dp[N]==null){
+            dp[N]=1;
+
+            //N-1부터 0까지중 N보다 작은 값들을 찾으면서 재귀호출한다
+            for(int i=N-1;i>=0;i--){
+                if(seq[i]<seq[N]){  //seq[N]값보다 작은 값을 찾으면서 계속 갱신한다
+                    dp[N]=Math.max(dp[N],LIS(i)+1);
+                }
+            }
+        }
+        return dp[N];
+    }
+
+    
+}

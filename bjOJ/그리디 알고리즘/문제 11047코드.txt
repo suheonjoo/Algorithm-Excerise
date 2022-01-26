@@ -1,0 +1,39 @@
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Main{      //파일 이름과 같아야 함
+    public static void main(String[] args){
+        Scanner in = new Scanner(System.in);
+
+        int N = in.nextInt();
+        int won = in.nextInt();
+        
+        int[] arr= new int[N];
+
+        for(int i=0; i<N;i++){
+            arr[i]=in.nextInt();
+        }
+
+        //Arrays.sort(arr);
+
+        int i= N-1;    //현재 판단하는 단위의 위치 변수i
+        int sum =0;         //필요한 동전개수 변수 
+
+        while(i>=0){
+            if(arr[i]<=won){
+                won -=arr[i];
+                sum++;
+            }
+            else{
+                i--;
+            }
+            
+
+        }
+        
+
+        System.out.println(sum);
+
+    }
+    
+}

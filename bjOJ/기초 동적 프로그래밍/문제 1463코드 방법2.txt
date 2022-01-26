@@ -1,0 +1,36 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+
+public class Main{      //파일 이름과 같아야 함
+
+    
+    public static void main(String[] args){
+        
+        Scanner in = new Scanner(System.in);
+        
+        int N = in.nextInt();   //나누려는 값을 받음
+
+    
+
+        System.out.print(recur(N,0));
+        
+        
+    }
+
+    static int recur(int N, int count){
+
+        //여기서 count는 시행 횟수를 의미
+        if(N<2){
+            return count;
+        }
+        return Math.min( recur(N/2,count+1+(N%2)) , recur(N/3,count+1+(N%3)) );
+        //여기서 -1하는 작업은 N%2 , N%3으로 해결해 준다
+        //여기서 중요한것은 2로 나누느냐, 3으로 나누느냐 의 우선순위를 알수 없으나
+        //-1 해주는 작업 보다는 우위에 있으므로 가능한 것임
+
+    }
+
+    
+}

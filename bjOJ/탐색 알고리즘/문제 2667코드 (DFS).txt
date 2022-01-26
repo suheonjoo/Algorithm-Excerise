@@ -1,0 +1,76 @@
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Main{      //파일 이름과 같아야 함
+
+    
+  
+    static boolean[][] visited =new boolean[25][25];
+    static int[] dx={0,0,1,-1}; //왼쪽 오른쪽만 움직이는 것이니깐 2,4번째는 0이 되는 것이다
+    static int[] dy={1,-1,0,0}; //위, 아래만 움지이는 거라 1,3번째는 0이다
+    static int n;
+    static int apartNum=0;  //단지 개수 변수
+    static int[][] map = new int[25][25];   //맵을 나타내는 배열
+    static int[] aparts =new int[25*25];        //해당 단지에 따른 그 안에 아파트 개수를 저장하는배열
+    
+    public static void main(String[] args){
+        
+        Scanner sc = new Scanner(System.in);
+        n=sc.nextInt();
+
+        map = new int[n][n];
+        visited = new boolean[n][n];
+
+        for(int i=0;i<n;i++){   //맵 형성을 위한 입력값 받기
+            String input = sc.next();
+            for(int j=0;j<n;j++){
+                map[i][j] = input.charAt(j)-'0';
+            }
+        }
+
+        for(int i=0;i<n;i++){   //방문된 단지인지 체크하 새로운 단지 탐색
+            for(int j=0;j<n;j++){   //이중 포문 이용
+                //조건: 해당 맵의 값이 1이고 방문된적이 없는 점
+                if(map[i][j]==1&&!visited[i][j]){
+                    apartNum++;
+                    dfs(i,j);
+                }
+            }
+        }
+        
+        Arrays.sort(aparts);
+        System.out.println(apartNum);
+
+        for(int i=0;i<aparts.length;i++){
+            if(aparts[i]==0){
+            }else{
+                System.out.println(aparts[i]);
+            }
+        }
+
+    }
+
+    static public void dfs(int x, int y){
+        
+        visited[x][y]=true; //시작점이기에 방문되었다고 표시
+        aparts[apartNum]++; //시작점 또한 아파트이기에 해당 단지에 아파트 개수++
+
+        for(int i=0;i<4;i++){   //상하좌우 아파트 접근
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+
+            if(nx>=0 && ny>=0 && nx<n && ny<n){ //맵범위내의 아파트 접근
+                if(map[nx][ny]==1&&!visited[nx][ny]){   //인접 점에 아파트가 있으면 방문되지 않은 점으로 이동
+                    dfs(nx,ny); //그 점 기점으로 다시 dfs로 재귀함수 이용
+                }
+            }
+        }
+        
+    }
+    
+}

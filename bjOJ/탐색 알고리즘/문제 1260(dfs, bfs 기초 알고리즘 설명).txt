@@ -1,0 +1,87 @@
+문제 1260
+
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Main{      //파일 이름과 같아야 함
+
+    static int[][] check;   //간선 연결 상태
+    static boolean[] checked;   //확인 여부
+    static int n;   //정점 개수
+    static int m;   //간선 개수
+    static int start;   //시작정점
+
+    //dfs 는 현재 이웃 노드 방문보다는 깊이 끝까지 들어가고 그후에 밑에서부터 주변노드를 방문하는 것임
+    public static void dfs(int i){
+        checked[i]=true;    //시작 정점을 true 로 설정
+        System.out.print(i+" ");
+
+        for(int j=1;j<=n;j++){
+            if(check[i][j]==1&&checked[j]==false){
+                dfs(j);
+            }
+        }
+    }
+
+    //bfs는 현재노드의 깊이 방문을 목적보다는 현재 인접노드를 먼저 방문하고 깊이 들어가는 것임
+    public static void bfs(){
+        Queue<Integer> queue =new LinkedList<Integer>();
+        //bfs는 큐를 이용하는 거시 맞음-> 먼저들어오는 순으로 검사하는 형식
+
+        queue.offer(start);
+        checked[start]=true;
+        System.out.print(start+" ");
+
+        while(!queue.isEmpty()){
+            int temp = queue.poll(); //poll이 pop같은 역할로 꺼내오는 것이다
+            //temp가 현재 진행중인 기준 노드이다
+
+            for(int j=1;j<=n;j++){  //기준노드 기점으로 인접노드를 먼저 방문하면서 큐에 넣는다
+                if(check[temp][j]==1&&checked[j]==false){//인접노드를 순회할때 이것이 방문되었는지 확인
+                    //인접노드인지      방문 되었는지
+                    queue.offer(j); //방문 안된 인접노드를 큐에 우선 넣는다
+                    checked[j]=true;    //그리고 큐에 넣은 노드를 방문됬다고 true로 바꿔줌
+                    System.out.print(j+" ");    //방문 된 것 출력
+                }
+            }
+
+        }
+
+    }
+
+    public static void main(String[] args){
+        
+        
+
+        Scanner sc = new Scanner(System.in);
+        n= sc.nextInt(); //정점 개수 입력
+        m= sc.nextInt();    //간선 개수 입력
+        start = sc.nextInt();   //시작 정점 입력
+
+        check = new int[1001][1001];    //인덱스가 정점을 가리키는 것처럼 설정
+        checked= new boolean[1001];     //초기값은 false
+        //해당 노드가 방문했는지 체크하는 노드이다
+
+        for(int i=0;i<m;i++){   //간선 연결 상태 저장
+            int x= sc.nextInt();
+            int y= sc.nextInt();
+
+            check[x][y]=check[y][x]=1;  //양방향간선이므로 대칭되는 점도 1로 설정
+        }
+
+        dfs(start); //dfs순회시작
+
+        checked = new boolean[1001];  //방문상태 다시 초기화
+        System.out.println();
+
+        bfs();
+    
+
+    }
+    
+}

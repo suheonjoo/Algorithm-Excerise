@@ -1,0 +1,41 @@
+문제 1541코드
+
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Main{      //파일 이름과 같아야 함
+    public static void main(String[] args){
+        
+        Scanner in = new Scanner(System.in);
+
+
+        int sum = Integer.MAX_VALUE;
+        //'-'부호 기준으로 문자열을 나눠준다
+        String[] substraction = in.nextLine().split("-");
+
+        for(int i=0;i<substraction.length;i++){
+            int temp=0;
+            //자바에서 split에서 +를 인식못함 그래서 \\+로 해야 함
+            String[] addition = substraction[i].split("\\+");
+
+            //+로 나눠 저장된 문자열 addition을 순회하면서
+            for(int j=0;j<addition.length;j++){
+                temp += Integer.parseInt(addition[j]); //일단 정수로 만들어줌
+            }
+
+            if(sum== Integer.MAX_VALUE) {
+                sum=temp; //처음 문자를 저장할 조건문
+                //필요 이유: 바로빼주게 됨
+            }
+            else{
+                sum -= temp;    //위에 조건문을 거치고 빼주어야 함
+            }
+
+        }
+
+        System.out.println(sum);
+
+    }
+    
+}

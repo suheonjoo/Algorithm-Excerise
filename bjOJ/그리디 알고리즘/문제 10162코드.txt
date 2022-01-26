@@ -1,0 +1,50 @@
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Main{      //파일 이름과 같아야 함
+    public static void main(String[] args){
+        
+        Scanner in = new Scanner(System.in);
+
+
+        int N = in.nextInt();
+        
+        
+        int[] arr= {10,60,300};
+        int[] arr1= {0,0,0};
+        
+
+        int i= 2;    //현재 판단하는 단위의 위치 변수i
+        int sum =0;         //필요한 동전개수 변수 
+
+        while(i>=0){
+            if(arr[i]<=N){
+                N -=arr[i];
+                arr1[i]++;
+            }
+            else{
+                i--;
+            }
+        }
+        
+        //Arrays.sort(arr1);
+
+        if(N==0){
+            //System.out.println(Arrays.toString(arr1).);
+            for(int j=2;j>=0;j--){
+                System.out.print(arr1[j]+" ");
+            }
+            //System.out.print(arr1[0]);
+
+
+        }else{
+            System.out.println(-1);
+        }
+
+        
+
+
+    }
+    
+}

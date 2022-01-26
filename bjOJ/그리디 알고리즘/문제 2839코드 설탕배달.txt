@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+
+public class Main{      파일 이름과 같아야 함
+    public static void
+        Scanner in = new Scanner(System.in);
+
+        int N = in.nextInt();
+
+        if(N==4N==7){
+            System.out.println(-1);
+        }
+        else if(N%5==0){
+            System.out.println(N5);
+        }
+        else if(N%5==1N%5==3){
+            System.out.println((N5)+1);
+        }
+        else if(N%5==2N%5==4){
+            System.out.println((N5)+2);
+        }
+
+        System.out.println(Hello World);
+    }
+    
+}

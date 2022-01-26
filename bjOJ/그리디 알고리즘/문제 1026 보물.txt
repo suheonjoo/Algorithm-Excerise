@@ -1,0 +1,45 @@
+문제 1026
+
+5
+1 1 1 6 0
+2 7 8 3 1
+
+1 1 0 1 6
+
+1 2 3 7 8
+6 1 1 1 0
+
+문제힌트를 보니깐
+
+A배열은 오름차순, B 배열을 내림차순으로 정렬하고
+서로 같은 인덱스 차리끼리 서로 곱하면 됨
+
++
+문제에서 B의 배열은 바꾸지 말라고 해서 
+배열을 복제하렬고 했는데 
+안해도 되더라
+
+
++배열 복사
+public class Array_Copy{
+    public static void main(String[] args)  {
+        int[] a = { 1, 2, 3, 4 };
+        int[] b = a.clone();
+    }
+}
+//b는 a의 주소만 복사하는 것 아님 (
+//깊은 복사하는 방법임)
+
+public class Array_Copy{
+    public static void main(String[] args)  {
+        int[] a = { 1, 2, 3, 4 };
+        int[] b = Arrays.copyOf(a, a.length);
+    }
+}
+//이것도 깊은 복사
+
+
+참고) 얕은 복사란 배열의 주소값만 복사하는 것임
+
+
+

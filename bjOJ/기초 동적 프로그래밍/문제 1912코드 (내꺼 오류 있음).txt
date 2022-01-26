@@ -1,0 +1,67 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+
+public class Main{      //파일 이름과 같아야 함
+
+    static int[] arr;
+    static Integer[] dp;
+    static int N;
+    static int start=0;
+    static int sum=0;
+    
+    public static void main(String[] args) throws IOException{
+
+        Scanner in = new Scanner(System.in);
+        
+        int N = in.nextInt();   //깊이를 입력 받는다
+        
+
+        arr= new int[N];
+        dp = new Integer[N+1];
+
+        dp[0]=0;
+        //arr[0]=0;
+        for(int i=0;i<N;i++){
+            arr[i]=in.nextInt();
+        }
+        find(N);
+        System.out.println(dp[N]);
+        
+    }   
+
+    public static int find(int N){
+        if(N==1){
+            return arr[0];
+        }
+
+        if(arr[N-1]>0){
+            //연속되고 있은 양수값의 시작점 찾기
+            for(int i=N-1;i>=0;i--){
+                if(arr[i]<0){
+                    break;
+                }
+            }
+            sum=0;
+        
+            for(int i=start;i<N;i++){
+                sum+= arr[i];
+            }
+    
+
+            dp[N]=Math.max(find(N-1),sum);
+       
+
+            return dp[N];
+        }else{
+            return find(N-1);
+        }
+
+    }
+
+
+}
