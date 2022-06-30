@@ -2,141 +2,129 @@ import java.util.*;
 
 
 
-
 public class Main { // 테스트 자바임
 
     
     public static void main(String[] args) {
 
-        StringBuffer sb = new StringBuffer();
+        //StringBuffer sb = new StringBuffer();
 
-        //String[] participant = {"119", "97674223", "1195524421"};
+        int[] participant = {1, 2, 3, 2, 3};
         //String[] completion = {"eden", "kiki"};
-        String[][] clothes = {{"yellowhat", "headgear"}, {"bluesunglasses", "eyewear"}, {"green_turban", "headgear"}};
+        int[][] clothes = {{0, 3}, {1, 9}, {2, 6}};
 
-        Solution s = new Solution();
-        s.Solution(clothes);
-        System.out.println("s.Solution(participant) = " + s.Solution(clothes));
+//        System.out.println("clothes. = " + Arrays.deepToString(clothes));
+//
+//        Integer[] integerArr = new Integer[] {1,3,5,2,4};
+//        //int[] integerArr = new int[] {1,3,5,2,4};
+//        String[] stringArr = new String[] {"A","C","B","E","D"};
+//
+//        Arrays.sort(integerArr,Comparator.reverseOrder());     //내림차순
+//        System.out.println("integerArr = " + Arrays.toString(integerArr));
+//
+//        Arrays.sort(stringArr,Comparator.reverseOrder());    //내림차순
+//        System.out.println("stringArr = " + Arrays.toString(stringArr));
+
+
+        System.out.println("s.solution(participant) = " + Solution.solution(participant));
         //System.out.println(solution);
 
     }
-
 }
+
+
 class Solution {
 
 
-    public int[] solution(String[] genres, int[] plays){
+    public void solution1(String[] operations){
 
-        HashMap<String, Integer> map = new HashMap<>();
-        for (int i=0;i<genres.length;i++){
-            map.put(genres[i],map.getOrDefault(genres[i],0)+plays[i]);
+
+    }
+
+    public static int[] solution(int[] answers) {
+
+        int[] answer = {};
+        int[] person1 = {1,2,3,4,5}; //이만큼씩 반복
+        int[] person2 = {2,1,2,3,2,4,2,5};
+        int[] person3 = {3,3,1,1,2,2,4,4,5,5};
+        int answer1=0, answer2 =0, answer3 =0;
+
+        for(int i =0; i<answers.length; i++){
+            if(person1[i%person1.length] == answers[i]) answer1++;
+            if(person2[i%person2.length] == answers[i]) answer2++;
+            if(person3[i%person3.length] == answers[i]) answer3++;
+        }
+        int max = Math.max(Math.max(answer1, answer2),answer3); // max값 구하기
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+        if(max==answer1) list.add(1); //max값이랑 같으면 넣는다.
+        if(max==answer2) list.add(2);
+        if(max==answer3) list.add(3);
+
+        answer = new int[list.size()];
+
+        for(int i =0; i<answer.length; i++) {
+            answer[i] = list.get(i);
         }
 
-        ArrayList<String> genres_ordered = new ArrayList<>();
-        while (map.size()!=0){
-            int max = -1;
-            String max_key = "";
-            for(String key: map.keySet()){
-                int tmp_cnt = map.get(key);
-                if(tmp_cnt>max){
-                    max = tmp_cnt;
-                    max_key = key;
-                }
-            }
-            genres_ordered.add(max_key);
-            map.remove(max_key);
-        }
-
-        // 2. 장르 내 노래 선정 // 장르 내에서 많이 재생된 노래를 먼저 수록합니다.
-        ArrayList<Music> result = new ArrayList<>();
-        for(String gern : genres_ordered){
-            ArrayList<Music> list = new ArrayList<>();
-            for(int i=0; i<genres.length; i++){
-                if(genres[i].equals(gern)){
-                    list.add(new Music(gern, plays[i], i));
-                }
-            }
-            Collections.sort(list, (o1, o2) -> o2.play - o1.play); // 내림차순 소팅
-            result.add(list.get(0)); 	// 1개는 무조건 수록
-            if(list.size()!=1){ 	// 더 수록할 곡이 있으면(==장르 내의 노래가 1개보다 많으면) 수록
-                result.add(list.get(1));
-            }
-        }
-
-        // print result
-        int[] answer = new int[result.size()];
-        for(int i=0; i<result.size(); i++){
-            answer[i] = result.get(i).idx;
-        }
         return answer;
 
     }
 
 
-    public int[] Solution(String[] genres, int[] plays) {
 
-        HashMap<String, Integer> map = new HashMap<>();
-        for(int i=0; i<genres.length; i++){
-            map.put(genres[i], map.getOrDefault(genres[i], 0)+plays[i]);
+
+
+    static boolean[] check;
+    static Set<Integer> set = new HashSet<>();
+
+
+    public int solution(String numbers) {
+
+
+        int answer = 0;
+
+        check = new boolean[numbers.length()];
+        for(int i=1; i<= numbers.length(); i++) {
+            char[] selectNumber = new char[i];
+            makeNumber(numbers, selectNumber, 0, i);
         }
 
-        // 1. 장르 선정  //속한 노래가 많이 재생된 장르를 먼저 수록합니다.
-        ArrayList<String> genres_ordered = new ArrayList<>();
-        while(map.size()!=0){
-            int max = -1;
-            String max_key = "";
-            for(String key : map.keySet()){
-                int tmp_cnt = map.get(key);
-                if(tmp_cnt>max){
-                    max = tmp_cnt;
-                    max_key = key;
-                }
-            }
-            genres_ordered.add(max_key);
-            map.remove(max_key);
-        }
-
-        // 2. 장르 내 노래 선정 // 장르 내에서 많이 재생된 노래를 먼저 수록합니다.
-        ArrayList<Music> result = new ArrayList<>();
-        for(String gern : genres_ordered){
-            ArrayList<Music> list = new ArrayList<>();
-            for(int i=0; i<genres.length; i++){
-                if(genres[i].equals(gern)){
-                    list.add(new Music(gern, plays[i], i));
-                }
-            }
-            Collections.sort(list, (o1, o2) -> o2.play - o1.play); // 내림차순 소팅
-            result.add(list.get(0)); 	// 1개는 무조건 수록
-            if(list.size()!=1){ 	// 더 수록할 곡이 있으면(==장르 내의 노래가 1개보다 많으면) 수록
-                result.add(list.get(1));
-            }
-        }
-
-        // print result
-        int[] answer = new int[result.size()];
-        for(int i=0; i<result.size(); i++){
-            answer[i] = result.get(i).idx;
+        for(int number: set) {
+            if(isPrime(number))
+                answer++;
         }
         return answer;
-
-
+    }
+    static boolean isPrime(int number) {
+        if(number<=1)
+            return false;
+        for(int i=2; i<number; i++)
+            if(number%i==0)
+                return false;
+        return true;
     }
 
-    static class Music{
-        String genre;
-        int play;
-        int idx;
+    static void makeNumber(String numbers, char[] str, int depth, int length) { //재귀함수
 
-        public Music(String genre, int play, int idx) {
-            this.genre = genre;
-            this.play = play;
-            this.idx = idx;
+        if(depth==length) {
+            set.add(Integer.parseInt(new String(str)));
+            return;
         }
+
+        for(int i=0; i<numbers.length(); i++) {
+            if(!check[i]) {
+                check[i] = true;
+                str[depth] = numbers.charAt(i);
+                makeNumber(numbers, str, depth+1, length);
+                check[i] = false;
+            }
+        }
+
     }
 
 }
-
-
 
 
 
