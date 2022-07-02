@@ -26,9 +26,12 @@ public class Main { // 테스트 자바임
 //        System.out.println("stringArr = " + Arrays.toString(stringArr));
 
 
-        System.out.println("s.solution(participant) = " + Solution.solution(participant));
+        //System.out.println("s.solution(participant) = " + Solution.solution(participant));
         //System.out.println(solution);
 
+        //B b = new B(10);
+        //C c = new C();
+        Y y = new Y();
     }
 }
 
@@ -37,92 +40,42 @@ class Solution {
 
 
     public void solution1(String[] operations){
-
+        Integer a = 10;
 
     }
 
-    public static int[] solution(int[] answers) {
 
-        int[] answer = {};
-        int[] person1 = {1,2,3,4,5}; //이만큼씩 반복
-        int[] person2 = {2,1,2,3,2,4,2,5};
-        int[] person3 = {3,3,1,1,2,2,4,4,5,5};
-        int answer1=0, answer2 =0, answer3 =0;
 
-        for(int i =0; i<answers.length; i++){
-            if(person1[i%person1.length] == answers[i]) answer1++;
-            if(person2[i%person2.length] == answers[i]) answer2++;
-            if(person3[i%person3.length] == answers[i]) answer3++;
+    public int[] solution(int[] numbers) {
+
+        String answer = "";
+        String []res =new String[numbers.length];
+
+        //문자열로 변경
+        for(int i=0; i<numbers.length; i++){
+            res[i]=String.valueOf(numbers[i]);
+
         }
-        int max = Math.max(Math.max(answer1, answer2),answer3); // max값 구하기
+        //문자열을 합쳤을 때  비교
+        Arrays.sort(res, (a,b)->{
+                    return (a+b).compareTo(b+a);
+                }
+        );
 
-        ArrayList<Integer> list = new ArrayList<>();
+        //정렬한 값 더하기
 
-        if(max==answer1) list.add(1); //max값이랑 같으면 넣는다.
-        if(max==answer2) list.add(2);
-        if(max==answer3) list.add(3);
-
-        answer = new int[list.size()];
-
-        for(int i =0; i<answer.length; i++) {
-            answer[i] = list.get(i);
+        for(int i=numbers.length-1; i>=0; i--){
+            answer+=res[i];
         }
+
+        //ex) 000인 경우 0으로 리턴
+        if(answer.charAt(0)=='0') return "0";
 
         return answer;
 
-    }
-
-
-
-
-
-    static boolean[] check;
-    static Set<Integer> set = new HashSet<>();
-
-
-    public int solution(String numbers) {
-
-
-        int answer = 0;
-
-        check = new boolean[numbers.length()];
-        for(int i=1; i<= numbers.length(); i++) {
-            char[] selectNumber = new char[i];
-            makeNumber(numbers, selectNumber, 0, i);
-        }
-
-        for(int number: set) {
-            if(isPrime(number))
-                answer++;
-        }
-        return answer;
-    }
-    static boolean isPrime(int number) {
-        if(number<=1)
-            return false;
-        for(int i=2; i<number; i++)
-            if(number%i==0)
-                return false;
-        return true;
-    }
-
-    static void makeNumber(String numbers, char[] str, int depth, int length) { //재귀함수
-
-        if(depth==length) {
-            set.add(Integer.parseInt(new String(str)));
-            return;
-        }
-
-        for(int i=0; i<numbers.length(); i++) {
-            if(!check[i]) {
-                check[i] = true;
-                str[depth] = numbers.charAt(i);
-                makeNumber(numbers, str, depth+1, length);
-                check[i] = false;
-            }
-        }
 
     }
+
 
 }
 
