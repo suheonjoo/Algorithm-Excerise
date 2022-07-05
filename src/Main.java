@@ -31,13 +31,14 @@ public class Main { // 테스트 자바임
 
         //B b = new B(10);
         //C c = new C();
-        Y y = new Y();
+        //Y y = new Y();
     }
 }
 
 
 class Solution {
 
+    Collections.sort()
 
     public void solution1(String[] operations){
         Integer a = 10;
