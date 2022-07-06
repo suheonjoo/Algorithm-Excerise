@@ -32,13 +32,19 @@ public class Main { // 테스트 자바임
         //B b = new B(10);
         //C c = new C();
         //Y y = new Y();
+
+        A a = new A();
+
     }
 }
+class A{
 
+
+}
 
 class Solution {
 
-    Collections.sort()
+    //Collections.sort()
 
     public void solution1(String[] operations){
         Integer a = 10;
@@ -47,7 +53,7 @@ class Solution {
 
 
 
-    public int[] solution(int[] numbers) {
+    public String solution(int[] numbers) {
 
         String answer = "";
         String []res =new String[numbers.length];
