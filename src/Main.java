@@ -19,8 +19,14 @@ public class Main { // 테스트 자바임
         System.out.println("s.solution(participant) = " + Solution.solution(participant));
         //System.out.println(solution);
 
+        So s = new So();
 
     }
+
+    class So {
+        int a;
+    }
+
 }
 
 
