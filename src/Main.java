@@ -1,26 +1,23 @@
 import java.util.*;
 
 
-
 public class Main { // 테스트 자바임
 
-    
+
     public static void main(String[] args) {
 
         //StringBuffer sb = new StringBuffer();
 
-        int[] participant = {3, 30, 34,1,2,3};
+        int[] participant = {3, 0, 6, 1, 5};
         //String[] completion = {"eden", "kiki"};
         int[][] clothes = {{0, 3}, {1, 9}, {2, 6}};
 
 
-
-
-        System.out.println("s.solution(participant) = " + Solution.solution(participant));
+        //System.out.println("s.solution(participant) = " + Solution.solution(participant));
         //System.out.println(solution);
 
-        So s = new So();
-
+        //So s = new So();
+        Solution.solution1();
     }
 
     class So {
@@ -34,43 +31,69 @@ class Solution {
 
     //Collections.sort()
 
-    public void solution1(String[] operations){
-        Integer a = 10;
+    public static void solution1() {
+        String[] stringArray = new String[4];
+        for (int i = 0; i < stringArray.length; i++) {
+            stringArray[i] = String.valueOf(i + 1);
+        }
+
+        Arrays.sort(stringArray, (a, b) -> {
+            System.out.println("(a+b) = " + (a+b) + " (b+a) = "+(b+a));
+
+            System.out.println("(a + b).compareTo(b+a) = " + (a + b).compareTo(b+a));
+
+            return (a + b).compareTo(b+a);
+        });
 
     }
 
+    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+    static boolean[] visited;
 
+    public static int solution(int n, int[][] edge) {
 
-    public static String solution(int[] numbers) {
+        Iterator
 
-        String answer = "";
-        String []res =new String[numbers.length];
+        visited = new boolean[n + 1];
+        int answer;
 
-        //문자열로 변경
-        for(int i=0; i<numbers.length; i++){
-            res[i]=String.valueOf(numbers[i]);
-
-        }
-        //문자열을 합쳤을 때  비교 //오름차순임 !!
-        Arrays.sort(res, (a,b)->{
-            System.out.println("a = " + a +" b = " + b);
-
-                    return (a+b).compareTo(b+a);
-                }
-        );
-        System.out.println("res = " + Arrays.toString(res));
-
-        //정렬한 값 더하기 //지금 보면 정렬한 값을 꺼꾸로 더함
-        for(int i=numbers.length-1; i>=0; i--){
-            answer+=res[i];
+        for (int i = 0; i <= n; i++) {
+            graph.add(i, new ArrayList<>());
         }
 
-        //ex) 000인 경우 0으로 리턴
-        if(answer.charAt(0)=='0') return "0";
-
+        for (int i = 0; i < edge.length; i++) {     // 양방향 추가해주기
+            graph.get(edge[i][0]).add(edge[i][1]);
+            graph.get(edge[i][1]).add(edge[i][0]);
+        }
+        answer = bfs();
         return answer;
 
+    }
+    public static int bfs() {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(1);
+        visited[1] = true;
 
+        int cnt = 0;
+        while (true) {
+            Queue<Integer> temp = new LinkedList<>();
+
+            while (!queue.isEmpty()) {
+                int cur = queue.poll();
+                for (int adj : graph.get(cur)) {
+                    if (!visited[adj]) {
+                        temp.add(adj);
+                        visited[adj] = true;
+                    }
+                }
+            }
+
+            if (temp.isEmpty()) break;
+            queue.addAll(temp);
+            cnt = temp.size();
+        }
+
+        return cnt;
     }
 
 
