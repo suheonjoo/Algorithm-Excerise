@@ -1,3 +1,5 @@
+import org.w3c.dom.Node;
+
 import java.util.*;
 
 
@@ -17,12 +19,15 @@ public class Main { // 테스트 자바임
         //System.out.println(solution);
 
         //So s = new So();
-        Solution.solution1();
+        //Solution.solution1();
+
+        int[] arrows;
+
+        arrows = new int[]{6, 6, 6, 4, 4, 4, 2, 2, 2, 0, 0, 0, 1, 6, 5, 5, 3, 6, 0};
+        System.out.println(Solution.solution(arrows));
+        Solution.solution(arrows);
     }
 
-    class So {
-        int a;
-    }
 
 }
 
@@ -35,65 +40,94 @@ class Solution {
         String[] stringArray = new String[4];
         for (int i = 0; i < stringArray.length; i++) {
             stringArray[i] = String.valueOf(i + 1);
+
+
         }
 
         Arrays.sort(stringArray, (a, b) -> {
-            System.out.println("(a+b) = " + (a+b) + " (b+a) = "+(b+a));
+            System.out.println("(a+b) = " + (a + b) + " (b+a) = " + (b + a));
 
-            System.out.println("(a + b).compareTo(b+a) = " + (a + b).compareTo(b+a));
+            System.out.println("(a + b).compareTo(b+a) = " + (a + b).compareTo(b + a));
 
-            return (a + b).compareTo(b+a);
+            return (a + b).compareTo(b + a);
         });
 
     }
 
-    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
-    static boolean[] visited;
+    public static int solution(int[] arrows) {
 
-    public static int solution(int n, int[][] edge) {
+        int answer = 0;
 
-        Iterator
+        int[] dx = {0, 1, 1, 1, 0, -1, -1, -1};
+        int[] dy = {-1, -1, 0, 1, 1, 1, 0, -1};
 
-        visited = new boolean[n + 1];
-        int answer;
+        Node curNode = new Node(0, 0);
 
-        for (int i = 0; i <= n; i++) {
-            graph.add(i, new ArrayList<>());
+        Map<Node, List<Node>> visited = new HashMap<>();
+
+
+        for (int arrow : arrows) {
+            //2번 반복해서 스케일 업함
+            for (int i = 0; i < 1; i++) {
+
+                Node nextNode = new Node(curNode.x + dx[arrow], curNode.y + dy[arrow]);
+
+                if (!visited.containsKey(nextNode)) {
+                    //다음 이동할 새로 만남점 추가해주기
+                    visited.put(nextNode, makeEdgeList(curNode));
+
+
+                    //현제 노드도 처음 만들어진거면 맵에 추가하기
+                    if (visited.get(curNode) == null) {
+
+                        visited.put(curNode, makeEdgeList(nextNode));
+                    } else {// 그게 아니면 다음 노드를 자기 리스트에 추가하기
+                        visited.get(curNode).add(nextNode);
+                    }
+
+                    //다음 노드를 방분핝 적이 있고, 간선은 처음 만들어진 것이면 각각 리스트에 추가하고 answer도 1 올려줌
+                } else if (!visited.get(nextNode).contains(curNode)) {
+                    visited.get(nextNode).add(curNode);
+                    visited.get(curNode).add(nextNode);
+                    answer++;
+                }
+
+                curNode = nextNode;
+
+            }
         }
-
-        for (int i = 0; i < edge.length; i++) {     // 양방향 추가해주기
-            graph.get(edge[i][0]).add(edge[i][1]);
-            graph.get(edge[i][1]).add(edge[i][0]);
-        }
-        answer = bfs();
         return answer;
+    }
+
+    private static List<Node> makeEdgeList(Node node) {
+        // edge 리스트 새로 만들기
+        List<Node> edge = new ArrayList<>();
+        edge.add(node);
+        return edge;
 
     }
-    public static int bfs() {
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(1);
-        visited[1] = true;
 
-        int cnt = 0;
-        while (true) {
-            Queue<Integer> temp = new LinkedList<>();
+    private static class Node{
 
-            while (!queue.isEmpty()) {
-                int cur = queue.poll();
-                for (int adj : graph.get(cur)) {
-                    if (!visited[adj]) {
-                        temp.add(adj);
-                        visited[adj] = true;
-                    }
-                }
-            }
+        int x, y;
 
-            if (temp.isEmpty()) break;
-            queue.addAll(temp);
-            cnt = temp.size();
+        public Node(int x, int y){
+            this.x=x;
+            this.y=y;
         }
 
-        return cnt;
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Node node = (Node) o;
+            return x == node.x && y == node.y;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(x, y);
+        }
     }
 
 
