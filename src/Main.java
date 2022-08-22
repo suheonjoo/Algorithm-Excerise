@@ -1,6 +1,7 @@
 import org.w3c.dom.Node;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class Main { // 테스트 자바임
@@ -8,126 +9,107 @@ public class Main { // 테스트 자바임
 
     public static void main(String[] args) {
 
-        //StringBuffer sb = new StringBuffer();
+        System.out.println("args.length = " + args.length);
+        for (String arg : args) {
+            System.out.println("arg = " + arg);
+        }
 
-        int[] participant = {3, 0, 6, 1, 5};
-        //String[] completion = {"eden", "kiki"};
-        int[][] clothes = {{0, 3}, {1, 9}, {2, 6}};
+        int[] a = {1};
 
 
-        //System.out.println("s.solution(participant) = " + Solution.solution(participant));
-        //System.out.println(solution);
 
-        //So s = new So();
-        //Solution.solution1();
+        System.out.println("a.length = " + a.length);
 
-        int[] arrows;
 
-        arrows = new int[]{6, 6, 6, 4, 4, 4, 2, 2, 2, 0, 0, 0, 1, 6, 5, 5, 3, 6, 0};
-        System.out.println(Solution.solution(arrows));
-        Solution.solution(arrows);
+        String new_id = "...!@BaT#*..y.abcdefghijklm";
+        //System.out.println((Solution.solution(new_id)));
+
+        Ac a1 = new Ac();
+        System.out.println("a1 = " + a1);
     }
 
 
+}
+class Ac{
+    int a;
+
+    @Override
+    public String toString() {
+        return "A{" +
+                "a=" + a +
+                '}';
+    }
 }
 
 
 class Solution {
 
-    //Collections.sort()
-
     public static void solution1() {
-        String[] stringArray = new String[4];
-        for (int i = 0; i < stringArray.length; i++) {
-            stringArray[i] = String.valueOf(i + 1);
-
-
-        }
-
-        Arrays.sort(stringArray, (a, b) -> {
-            System.out.println("(a+b) = " + (a + b) + " (b+a) = " + (b + a));
-
-            System.out.println("(a + b).compareTo(b+a) = " + (a + b).compareTo(b + a));
-
-            return (a + b).compareTo(b + a);
-        });
 
     }
 
-    public static int solution(int[] arrows) {
-
-        int answer = 0;
-
-        int[] dx = {0, 1, 1, 1, 0, -1, -1, -1};
-        int[] dy = {-1, -1, 0, 1, 1, 1, 0, -1};
-
-        Node curNode = new Node(0, 0);
-
-        Map<Node, List<Node>> visited = new HashMap<>();
+    public static String solution(String new_id) {
 
 
-        for (int arrow : arrows) {
-            //2번 반복해서 스케일 업함
-            for (int i = 0; i < 1; i++) {
-
-                Node nextNode = new Node(curNode.x + dx[arrow], curNode.y + dy[arrow]);
-
-                if (!visited.containsKey(nextNode)) {
-                    //다음 이동할 새로 만남점 추가해주기
-                    visited.put(nextNode, makeEdgeList(curNode));
+        String answer = "";
 
 
-                    //현제 노드도 처음 만들어진거면 맵에 추가하기
-                    if (visited.get(curNode) == null) {
+//        1단계 new_id의 모든 대문자를 대응되는 소문자로 치환합니다.
+        new_id = new_id.toLowerCase();
 
-                        visited.put(curNode, makeEdgeList(nextNode));
-                    } else {// 그게 아니면 다음 노드를 자기 리스트에 추가하기
-                        visited.get(curNode).add(nextNode);
-                    }
+        System.out.println("new_id = " + new_id);
 
-                    //다음 노드를 방분핝 적이 있고, 간선은 처음 만들어진 것이면 각각 리스트에 추가하고 answer도 1 올려줌
-                } else if (!visited.get(nextNode).contains(curNode)) {
-                    visited.get(nextNode).add(curNode);
-                    visited.get(curNode).add(nextNode);
-                    answer++;
-                }
 
-                curNode = nextNode;
+        int length = new_id.length();
 
+//        2단계 new_id에서 알파벳 소문자, 숫자, 빼기(-), 밑줄(_), 마침표(.)를 제외한 모든 문자를 제거합니다.
+        for (int i = 0; i < length; i++) {
+            if ('a' <= new_id.charAt(i) && new_id.charAt(i) <= 'z') {
+                continue;
             }
+
+            if ('0' <= new_id.charAt(i) && new_id.charAt(i) <= '9') {
+                continue;
+            }
+
+            if (new_id.charAt(i) == '-' || new_id.charAt(i) == '_' || new_id.charAt(i) == '.') {
+                continue;
+            }
+
+            new_id = new_id.replace(new_id.charAt(i), ' ');
+            System.out.println("new_id = " + new_id);
         }
+
+        new_id = new_id.replaceAll(" ","");
+
+        System.out.println("new_id = " + new_id);
+
+
+//        3단계 new_id에서 마침표(.)가 2번 이상 연속된 부분을 하나의 마침표(.)로 치환합니다.
+        for (int i = 0; i < new_id.length(); i++) {
+
+        }
+
+
+//        4단계 new_id에서 마침표(.)가 처음이나 끝에 위치한다면 제거합니다.
+
+
+
+
+//        5단계 new_id가 빈 문자열이라면, new_id에 "a"를 대입합니다.
+
+
+
+//        6단계 new_id의 길이가 16자 이상이면, new_id의 첫 15개의 문자를 제외한 나머지 문자들을 모두 제거합니다.
+
+//                만약 제거 후 마침표(.)가 new_id의 끝에 위치한다면 끝에 위치한 마침표(.) 문자를 제거합니다.
+
+
+//        7단계 new_id의 길이가 2자 이하라면, new_id의 마지막 문자를 new_id의 길이가 3이 될 때까지 반복해서 끝에 붙입니다.
+
+
         return answer;
-    }
 
-    private static List<Node> makeEdgeList(Node node) {
-        // edge 리스트 새로 만들기
-        List<Node> edge = new ArrayList<>();
-        edge.add(node);
-        return edge;
-
-    }
-
-    private static class Node{
-
-        int x, y;
-
-        public Node(int x, int y){
-            this.x=x;
-            this.y=y;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Node node = (Node) o;
-            return x == node.x && y == node.y;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(x, y);
-        }
     }
 
 
