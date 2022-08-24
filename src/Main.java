@@ -1,6 +1,7 @@
 import org.w3c.dom.Node;
 
 import java.util.*;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.stream.Collectors;
 
 
@@ -9,35 +10,47 @@ public class Main { // 테스트 자바임
 
     public static void main(String[] args) {
 
-        System.out.println("args.length = " + args.length);
-        for (String arg : args) {
-            System.out.println("arg = " + arg);
-        }
+        HashMap<Integer, Integer> integerIntegerHashMap = new HashMap<>();
+        integerIntegerHashMap.entrySet().iterator();
 
-        int[] a = {1};
+        HashSet
+
+        TreeMap<Integer, String> treeMap = new TreeMap<>((o1, o2) -> o2-o1);
+        treeMap.put(1,"a");
+        treeMap.put(2, "b");
+
+        System.out.println("treeMap.pollFirstEntry() = " + treeMap.pollFirstEntry());
+
+        System.out.println("treeMap = " + treeMap);
 
 
-
-        System.out.println("a.length = " + a.length);
 
 
         String new_id = "...!@BaT#*..y.abcdefghijklm";
         //System.out.println((Solution.solution(new_id)));
 
-        Ac a1 = new Ac();
-        System.out.println("a1 = " + a1);
+
+        Trnawef
+
     }
 
 
 }
-class Ac{
+class Ac implements Cloneable{
     int a;
+
+    private int inte;
 
     @Override
     public String toString() {
         return "A{" +
                 "a=" + a +
                 '}';
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
 
