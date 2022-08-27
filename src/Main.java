@@ -1,5 +1,8 @@
 import org.w3c.dom.Node;
 
+import java.lang.annotation.Annotation;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.*;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.stream.Collectors;
@@ -14,31 +17,39 @@ public class Main { // 테스트 자바임
         String new_id = "...!@BaT#*..y.abcdefghijklm";
         //System.out.println((Solution.solution(new_id)));
 
-        List<Integer> integerList = new ArrayList<>();
-        System.out.println(1);
+        Class<Card> cardClass = Card.class;
 
-        integerList.add(1);
-        integerList.add(2);
-        integerList.add(3);
+        System.out.println("cardClass = " + cardClass);
 
-        Card card = new Card();
-        System.out.println("Card.c.toString() = " + Card.c.toString());
+        annoTest annotation = cardClass.getAnnotation(annoTest.class);
 
-        //System.out.println("Card.King.A = " + Card.King.A);
-        //System.out.println("card = " + Card.King.B == Card.Value.D);
+        System.out.println("annotation = " + annotation);
+
+        System.out.println("annotation.add() = " + annotation.add());
+
+        System.out.println("annotation.stringArray().toString() = " + annotation.stringArray().toString());
 
     }
 
 
 }
 
+@annoTest(
+        add = 2,
+        stringArray = {"a","b"}
+)
 class Card {
-    static final Card c = new Card() {
-        @Override
-        public String toString() {
-            return super.toString();
-        }
-    } ;
+
+
+
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@interface annoTest{
+
+    int va = 1;
+    int add()  default 1;
+    String[] stringArray();
 
 }
 
