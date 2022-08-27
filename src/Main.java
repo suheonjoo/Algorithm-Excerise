@@ -10,49 +10,38 @@ public class Main { // 테스트 자바임
 
     public static void main(String[] args) {
 
-        HashMap<Integer, Integer> integerIntegerHashMap = new HashMap<>();
-        integerIntegerHashMap.entrySet().iterator();
-
-        HashSet
-
-        TreeMap<Integer, String> treeMap = new TreeMap<>((o1, o2) -> o2-o1);
-        treeMap.put(1,"a");
-        treeMap.put(2, "b");
-
-        System.out.println("treeMap.pollFirstEntry() = " + treeMap.pollFirstEntry());
-
-        System.out.println("treeMap = " + treeMap);
-
-
-
 
         String new_id = "...!@BaT#*..y.abcdefghijklm";
         //System.out.println((Solution.solution(new_id)));
 
+        List<Integer> integerList = new ArrayList<>();
+        System.out.println(1);
 
-        Trnawef
+        integerList.add(1);
+        integerList.add(2);
+        integerList.add(3);
+
+        Card card = new Card();
+        System.out.println("Card.c.toString() = " + Card.c.toString());
+
+        //System.out.println("Card.King.A = " + Card.King.A);
+        //System.out.println("card = " + Card.King.B == Card.Value.D);
 
     }
 
 
 }
-class Ac implements Cloneable{
-    int a;
 
-    private int inte;
+class Card {
+    static final Card c = new Card() {
+        @Override
+        public String toString() {
+            return super.toString();
+        }
+    } ;
 
-    @Override
-    public String toString() {
-        return "A{" +
-                "a=" + a +
-                '}';
-    }
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 }
+
 
 
 class Solution {
@@ -93,7 +82,7 @@ class Solution {
             System.out.println("new_id = " + new_id);
         }
 
-        new_id = new_id.replaceAll(" ","");
+        new_id = new_id.replaceAll(" ", "");
 
         System.out.println("new_id = " + new_id);
 
@@ -107,10 +96,7 @@ class Solution {
 //        4단계 new_id에서 마침표(.)가 처음이나 끝에 위치한다면 제거합니다.
 
 
-
-
 //        5단계 new_id가 빈 문자열이라면, new_id에 "a"를 대입합니다.
-
 
 
 //        6단계 new_id의 길이가 16자 이상이면, new_id의 첫 15개의 문자를 제외한 나머지 문자들을 모두 제거합니다.
