@@ -1,0 +1,115 @@
+{\rtf1\ansi\ansicpg949\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset129 AppleSDGothicNeo-Regular;\f2\fmodern\fcharset0 Courier;
+\f3\fmodern\fcharset0 Courier-Oblique;\f4\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red191\green100\blue38;\red32\green32\blue32;\red153\green168\blue186;
+\red133\green96\blue154;\red254\green187\blue91;\red86\green132\blue173;\red109\green109\blue109;}
+{\*\expandedcolortbl;;\csgenericrgb\c74902\c39216\c14902;\csgenericrgb\c12549\c12549\c12549;\csgenericrgb\c60000\c65882\c72941;
+\csgenericrgb\c52157\c37647\c60392;\csgenericrgb\c99608\c73333\c35686;\csgenericrgb\c33725\c51765\c67843;\csgenericrgb\c42745\c42745\c42745;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14400\viewh10800\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs30 \cf0 \
+\
+
+\f1 \'b0\'a1\'c0\'e5
+\f0  
+\f1 \'b8\'d5
+\f0  
+\f1 \'b3\'eb\'b5\'e5
+\f0 (
+\f1 \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a1\'b8\'d3\'bd\'ba
+\f0 )\
+\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\fs26 \cf2 \cb3 static \cf4 ArrayList<ArrayList<Integer>> 
+\f3\i \cf5 graph 
+\f2\i0 \cf4 = \cf2 new \cf4 ArrayList<>()\cf2 ;\
+static boolean\cf4 [] 
+\f3\i \cf5 visited
+\f2\i0 \cf2 ;\
+\
+public static int \cf6 solution\cf4 (\cf2 int \cf4 n\cf2 , int\cf4 [][] edge) \{\
+\
+    
+\f3\i \cf5 visited 
+\f2\i0 \cf4 = \cf2 new boolean\cf4 [n + \cf7 1\cf4 ]\cf2 ;\
+    int \cf4 answer\cf2 ;\
+\
+    for \cf4 (\cf2 int \cf4 i = \cf7 0\cf2 ; \cf4 i <= n\cf2 ; \cf4 i++) \{\
+        
+\f3\i \cf5 graph
+\f2\i0 \cf4 .add(i\cf2 , new \cf4 ArrayList<>())\cf2 ;\
+    \cf4 \}\
+\
+    \cf2 for \cf4 (\cf2 int \cf4 i = \cf7 0\cf2 ; \cf4 i < edge.\cf5 length\cf2 ; \cf4 i++) \{     \cf8 // 
+\f1 \'be\'e7\'b9\'e6\'c7\'e2
+\f4  
+\f1 \'c3\'df\'b0\'a1\'c7\'d8\'c1\'d6\'b1\'e2
+\f4 \
+        
+\f3\i \cf5 graph
+\f2\i0 \cf4 .get(edge[i][\cf7 0\cf4 ]).add(edge[i][\cf7 1\cf4 ])\cf2 ;\
+        
+\f3\i \cf5 graph
+\f2\i0 \cf4 .get(edge[i][\cf7 1\cf4 ]).add(edge[i][\cf7 0\cf4 ])\cf2 ;\
+    \cf4 \}\
+    answer = 
+\f3\i bfs
+\f2\i0 ()\cf2 ;\
+    return \cf4 answer\cf2 ;\
+\
+\cf4 \}\
+\cf2 public static int \cf6 bfs\cf4 () \{\
+    Queue<Integer> queue = \cf2 new \cf4 LinkedList<>()\cf2 ;\
+    \cf4 queue.add(\cf7 1\cf4 )\cf2 ;\
+    
+\f3\i \cf5 visited
+\f2\i0 \cf4 [\cf7 1\cf4 ] = \cf2 true;\
+\
+    int \cf4 cnt = \cf7 0\cf2 ;\
+    while \cf4 (\cf2 true\cf4 ) \{\
+        Queue<Integer> temp = \cf2 new \cf4 LinkedList<>()\cf2 ;\
+\
+        while \cf4 (!queue.isEmpty()) \{\
+            \cf2 int \cf4 cur = queue.poll()\cf2 ;\
+            for \cf4 (\cf2 int \cf4 adj : 
+\f3\i \cf5 graph
+\f2\i0 \cf4 .get(cur)) \{\
+                \cf2 if \cf4 (!
+\f3\i \cf5 visited
+\f2\i0 \cf4 [adj]) \{\
+                    temp.add(adj)\cf2 ;\
+                    
+\f3\i \cf5 visited
+\f2\i0 \cf4 [adj] = \cf2 true;\
+                \cf4 \}\
+            \}\
+        \}\
+\
+        \cf2 if \cf4 (temp.isEmpty()) \cf2 break;\
+        \cf4 queue.addAll(temp)\cf2 ;\
+        \cf4 cnt = temp.size()\cf2 ;\
+    \cf4 \}\
+\
+    \cf2 return \cf4 cnt\cf2 ;\
+\cf4 \}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs30 \cf0 \cb1 \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}

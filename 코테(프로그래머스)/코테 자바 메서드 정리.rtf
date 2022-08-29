@@ -1,0 +1,114 @@
+{\rtf1\ansi\ansicpg949\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;\f1\fmodern\fcharset0 Courier;\f2\fmodern\fcharset0 Courier-Oblique;
+\f3\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red255\green255\blue10;\red153\green168\blue186;\red32\green32\blue32;
+\red191\green100\blue38;\red251\green2\blue7;}
+{\*\expandedcolortbl;;\cssrgb\c99942\c98555\c0;\csgenericrgb\c60000\c65882\c72941;\csgenericrgb\c12549\c12549\c12549;
+\csgenericrgb\c74902\c39216\c14902;\cssrgb\c100000\c14913\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14400\viewh10800\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs30 \cf0 \
+\
+\
+*HashMap hm\
+hm.put(key, value)\
+hm.getOrDefault(key, value)\
+hm.get(key)\
+hm.keySet()  //key\'b5\'e9 \'c1\'fd\'c7\'d5\
+hm.containsKey()\
+hm.values   //values \'b5\'e9 \'c1\'fd\'c7\'d5\
+\
+*HashSet\
+\
+\
+\
+*String[] s\
+s.equals()\
+Arrays.sort(s)  //s \'b9\'e8\'bf\'ad\'c0\'bb \'bf\'c0\'b8\'a7\'c2\'f7\'bc\'f8\'c0\'b8\'b7\'ce \'c1\'a4\'b7\'c4\
+s.length\
+s.startsWith(\'a1\'b0\'a1\'b1)  //\'c7\'d8\'b4\'e7 \'b9\'ae\'c0\'da\'bf\'ad\'b7\'ce \'bd\'c3\'c0\'db\'c7\'cf\'b4\'c2\'c1\'f6 \'c8\'ae\'c0\'ce\'c7\'d8\'c1\'d6\'b4\'c2 boolean\
+\
+\
+* String s\
+s.length();\
+s.substring(a,b)// a~b\'b1\'ee\'c1\'f6 \'c0\'ce\'b5\'a5\'bd\'ba\'c0\'c7 string \'b0\'aa\
+\
+\
+* PriorityQueue pq : \'c8\'fc\'c1\'a4\'b7\'c4 \'c0\'da\'b7\'e1\'b1\'b8\'c1\'b6 , Queue\'c0\'ce\'c5\'cd\'c6\'e4\'c0\'cc\'bd\'ba\'c0\'c7 \'b1\'b8\'c7\'f6\'c3\'bc\
+PriorityQueue<Integer> pq = new PriorityQueue<>(); //\'bf\'c0\'b8\'a7 \'c2\'f7\'bc\'f8, \'c3\'d6\'bc\'d2\'c8\'fc\
+PriorityQueue<Integer> maxPq = new PriorityQueue<>(\cb2 Collections.reverseOrder()\cb1 ); //\'b3\'bb\'b8\'b2\'c2\'f7\'bc\'f8, \'c3\'d6\'b4\'eb\'c8\'fc\
+pq.offer = pq.add // \'c5\'a5\'bf\'a1 \'c3\'df\'b0\'a1\
+pq.poll() // \'c5\'a5\'bf\'a1\'bc\'ad \'bb\'cc\'b1\'e2 \'b9\'d7 \'bb\'e8\'c1\'a6\
+pq.peek() // \'c1\'a6\'c0\'cf \'c0\'a7\'c7\'d8\'c0\'d6\'b4\'c2\'b0\'cd \'ba\'b8\'bf\'a9\'c1\'d6\'b1\'e2\'b8\'b8 \'bb\'e8\'c1\'a6\'b4\'c2 \'be\'c8\'c7\'d4\
+\
+\
+* StringTokenizer :\'b9\'ae\'c0\'da\'bf\'ad\'c0\'bb \'bf\'ec\'b8\'ae\'b0\'a1 \'c1\'f6\'c1\'a4\'c7\'d1 \'b1\'b8\'ba\'d0\'c0\'da\'b7\'ce \'b9\'ae\'c0\'da\'bf\'ad\'c0\'bb \'c2\'c9\'b0\'b3\'c1\'d6\'b4\'c2 \'c5\'ac\'b7\'a1\'bd\'ba\'c0\'d3\
+StringTokenizer st = new StringTokenizer(\'a1\'b0\'b5\'e9\'be\'ee\'b0\'a1\'b9\'ae\'c0\'da\'bf\'ad\'a1\'b1)\
+st.nextToken();\
+\
+\
+* Arrays\
+Arrays.sort(\'b9\'e8\'bf\'ad) //\'bf\'c0\'b8\'a7 \'c2\'f7\'bc\'f8\
+- \'c0\'cc\'c2\'f7 \'b9\'e8\'bf\'ad \'b0\'b0\'c0\'ba \'b0\'e6\'bf\'ec \'b6\'f7\'b4\'d9 \'c7\'d4\'bc\'f6 \'bd\'e1\'be\'df\'c7\'d4\
+Arrays.sort(jobs, \cb2 (o1, o2) -> o1[0] - o2[0]\cb1 );//\'b3\'bb\'b8\'b2\'c2\'f7\'bc\'f8\'c0\'ba o1-> o2, o2-> o1\'c0\'b8\'b7\'ce \'b9\'d9\'b2\'d9\'b8\'e9 \'b5\'ca\
+- \'b3\'bb\'b8\'b2\'c2\'f7\'bc\'f8\
+Integer[] integerArr = new Integer[] \{1,3,5,2,4\};                          \
+String[] stringArr = new String[] \{"A","C","B","E","D"\};       \
+\
+Arrays.sort(integerArr, \cb2 Comparator.reverseOrder()\cb1 );     //\'b3\'bb\'b8\'b2\'c2\'f7\'bc\'f8  //Collections.reverseOrder \'c0\'cc\'b0\'c9\'b7\'ce \'bd\'e1\'b5\'b5 \'b5\'ca\
+Arrays.sort(stringArr, \cb2 Collections.reverseOrder()\cb1 );    //\'b3\'bb\'b8\'b2\'c2\'f7\'bc\'f8\
+(\'c2\'fc\'b0\'ed\'b7\'ce \'bf\'a9\'b1\'e2\'bc\'ad\'b4\'c2 wrapper\'c5\'ac\'b7\'a1\'bd\'ba \'c0\'cc\'bf\'eb\'c7\'df\'c1\'f6\'b8\'b8 primitive type\'c0\'b8\'b7\'ce \'c1\'d6\'b8\'e9 \'bf\'a1\'b7\'af\'b3\'b2 \'bf\'d6\'b3\'c4\'c7\'cf\'b8\'e9 Collections.reverseOrder()\'c0\'da\'b8\'ae\'bf\'a1 sort(T[] a, Comparator <? super T> c)\'b6\'f3\'b0\'c5 T\'b6\'f3\'b4\'c2 \'b0\'b4\'c3\'bc \'c5\'ac\'b7\'a1\'bd\'ba \'c5\'b8\'c0\'d4\'b8\'b8 \'bf\'c3\'bc\'f6 \'c0\'d6\'b4\'c2 \'b0\'cd\'c0\'d3 \'b1\'d7\'b7\'a1\'bc\'ad primitive \'c5\'b8\'c0\'d4\'c0\'bb \'b5\'e9\'be\'ee\'b0\'a5\'bc\'f6 \'be\'f8\'c0\'bd\'a4\'be, \'c0\'e7\'b9\'d5\'b3\'d7 \'a4\'bb\'a4\'bb, \'c0\'cc\'c1\'a6 \'c1\'bb \'b5\'e9\'c3\'c4\'ba\'b8\'b8\'e9 \'c0\'cc\'c7\'d8\'c7\'d2\'bc\'f6 \'c0\'d6\'b4\'c2 \'b0\'cd\'b0\'b0\'c0\'bd)\
+- \'c0\'cc\'b0\'c5 \'c7\'d2\'b6\'a7 Compartor.reversOrder\'b4\'c2 \'b0\'b4\'c3\'bc\'b8\'b8 \'b5\'c7\'b4\'c2 \'b0\'cd\'c0\'d3 \'bf\'f8\'bd\'c3\'b0\'aa\'c0\'ba \'be\'c8\'b5\'ca(Integer \'b5\'ca, int \'be\'c8\'b5\'ca)\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1 \cf3 \cb4 Arrays.
+\f2\i \cf3 \cb4 sort
+\f1\i0 \cf3 \cb4 (res\cf5 , \cf3 (a\cf5 ,\cf3 b)->\{\cf5                 \
+		return \cf3 (a+b).compareTo(b+a)\cf5 ;\
+       \cf3 \}\
+    )\cf5 ;\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 -\'c1\'a4\'b7\'c4 \'c7\'d2\'b6\'a7, a, b\'b0\'a1 \
+(1) \'b1\'d7\'b3\'c9 \cf6 \'c1\'a4\'bc\'f6\cf0 \'b8\'e9 a-b\'b7\'ce \'b8\'ae\'c5\'cf\'c7\'d8\'bc\'ad \'b1\'d7\'b3\'c9 \'bf\'c0\'b8\'a7\'c2\'f7\'bc\'f8 \'c7\'d2\'bc\'f6 \'c0\'d6\'b4\'c2\'b5\'a5 \
+(2) a,b\'b0\'a1 \cf6 \'b9\'ae\'c0\'da\'bf\'ad\cf0  \'c5\'b8\'c0\'d4\'c0\'cc\'b8\'e9 \'c5\'a9\'b1\'e2 \'ba\'f1\'b1\'b3\'b8\'a6 .compareTo\'b8\'a6 \'c7\'d8\'c1\'e0\'be\'df\'c7\'d4\
+   (2-1) \'bf\'a9\'b1\'e2\'bc\'ad \cf6 \'b1\'e2\'c1\'d8\'b0\'aa(a+b)\'bf\'a1 \'ba\'f1\'b1\'b3\'b4\'eb\'bb\'f3(b+a)\'c0\'cc \'c6\'f7\'c7\'d4\'b5\'c7\'be\'ee\'c0\'d6\'c0\'bb \'b0\'e6\'bf\'ec,\cf0  \'bc\'ad\'b7\'ce\'c0\'c7 \'b9\'ae\'c0\'da\'bf\'ad \'b1\'e6\'c0\'cc\'c0\'c7 \'c2\'f7\'c0\'cc\'b0\'aa\'c0\'bb \'b8\'ae\'c5\'cf\'c7\'d4\
+   (2-2)\cf6 \'b1\'d7\'b7\'af\'c1\'f6 \'be\'ca\'c0\'bb \'b0\'e6\'bf\'ec,\cf0  \'a1\'b0cde\'a1\'b1 \'a1\'b0k\'a1\'b1 \'ba\'f1\'b1\'b3\'c7\'cf\'b8\'e9 c \'bf\'cd k\'bf\'cd\'c0\'c7 \'be\'c6\'bd\'ba\'c5\'b0 \'c4\'da\'b5\'e5 \'b0\'aa\'b8\'b8 \'ba\'f1\'b1\'b3\'c7\'d4\
+
+\f3 \
+\
+
+\f0 \
+\
+\
+-\'b9\'e8\'bf\'ad\'bf\'a1\'bc\'ad \'bf\'f8\'c7\'cf\'b4\'c2 \'b9\'fc\'c0\'a7\'b1\'ee\'c1\'f6 \'c3\'df\'c3\'e2 : copyOfRange()\
+Arrays.copyOfRange(\'b9\'e8\'bf\'ad, from, to ) \'bf\'a9\'b1\'e2\'bc\'ad \'b4\'e7\'bf\'ac\'c8\'f7 to \'c0\'ce\'b5\'a6\'bd\'ba\'ba\'7a \'c6\'f7\'c3\'63\'be\'c8\'c7\'d4 \'c0\'cc\'b0\'c7 \'c0\'da\'b9\'d9 \'b1\'b9\'b7\'ea\'c0\'d3 \'a4\'be \
+\
+- \'b9\'e8\'bf\'ad \'be\'c8\'bf\'a1 \'c0\'d6\'b4\'c2 \'bf\'f8\'bc\'d2\'b5\'e9 \'c3\'e2\'b7\'c2\
+Arrays.toString(str);		//\'c0\'cf\'c2\'f7\'bf\'f8 \'b9\'e8\'bf\'ad\'bf\'a1\'bc\'ad\
+Arrays.deepToString(str) // \'b4\'d9\'c2\'f7\'bf\'f8 \'b9\'e8\'bf\'ad\'bf\'a1\'bc\'ad\
+\
+\
+*stream\
+filter():   Arrays.stream(dayOfend).filter(i->i!=0).toArray(); //i\'b0\'a1 0\'c0\'ce\'b0\'c5\'b8\'a6 \'b0\'c9\'b7\'af\'c1\'d6\'b4\'c2 \'c7\'ca\'c5\'cd\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}

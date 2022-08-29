@@ -1,125 +1,69 @@
-import org.w3c.dom.Node;
-
-import java.lang.annotation.Annotation;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.util.*;
-import java.util.concurrent.LinkedBlockingDeque;
-import java.util.stream.Collectors;
-
-
 public class Main { // 테스트 자바임
 
 
     public static void main(String[] args) {
 
+        String new_id = "=.=";
+        System.out.println((Solution.solution(new_id)));
 
-        String new_id = "...!@BaT#*..y.abcdefghijklm";
-        //System.out.println((Solution.solution(new_id)));
 
-        Class<Card> cardClass = Card.class;
-
-        System.out.println("cardClass = " + cardClass);
-
-        annoTest annotation = cardClass.getAnnotation(annoTest.class);
-
-        System.out.println("annotation = " + annotation);
-
-        System.out.println("annotation.add() = " + annotation.add());
-
-        System.out.println("annotation.stringArray().toString() = " + annotation.stringArray().toString());
 
     }
+}
 
+class Settings1 {
+
+    private static volatile Settings1 instance;
+
+    private Settings1(){}
+
+    public static Settings1 getInstance() {
+        if (Settings1.instance == null) {
+            synchronized (Settings1.class) {
+                if (Settings1.instance == null) {
+                    instance = new Settings1();
+                }
+            }
+        }
+        return instance;
+    }
 
 }
 
-@annoTest(
-        add = 2,
-        stringArray = {"a","b"}
-)
-class Card {
+class Settings2 {
 
+    private Settings2() {
+    }
 
+    private static class SettingsHolder {
+        private static final Settings2 INSTANCE = new Settings2();
+    }
 
+    public static Settings2 getInstance() {
+        return SettingsHolder.INSTANCE;
+    }
 }
 
-@Retention(RetentionPolicy.RUNTIME)
-@interface annoTest{
-
-    int va = 1;
-    int add()  default 1;
-    String[] stringArray();
-
+enum Settings3 {
+    INSTANCE;
 }
 
 
 
 class Solution {
 
-    public static void solution1() {
 
-    }
+    public static int solution(String s) {
+        String[] num = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
 
-    public static String solution(String new_id) {
-
-
-        String answer = "";
-
-
-//        1단계 new_id의 모든 대문자를 대응되는 소문자로 치환합니다.
-        new_id = new_id.toLowerCase();
-
-        System.out.println("new_id = " + new_id);
-
-
-        int length = new_id.length();
-
-//        2단계 new_id에서 알파벳 소문자, 숫자, 빼기(-), 밑줄(_), 마침표(.)를 제외한 모든 문자를 제거합니다.
-        for (int i = 0; i < length; i++) {
-            if ('a' <= new_id.charAt(i) && new_id.charAt(i) <= 'z') {
-                continue;
-            }
-
-            if ('0' <= new_id.charAt(i) && new_id.charAt(i) <= '9') {
-                continue;
-            }
-
-            if (new_id.charAt(i) == '-' || new_id.charAt(i) == '_' || new_id.charAt(i) == '.') {
-                continue;
-            }
-
-            new_id = new_id.replace(new_id.charAt(i), ' ');
-            System.out.println("new_id = " + new_id);
+        //숫자가 0~9까지 10개로 정해져 있으므로 i<10
+        for(int i=0; i<10; i++){
+            s = s.replace(num[i], Integer.toString(i));
         }
 
-        new_id = new_id.replaceAll(" ", "");
-
-        System.out.println("new_id = " + new_id);
-
-
-//        3단계 new_id에서 마침표(.)가 2번 이상 연속된 부분을 하나의 마침표(.)로 치환합니다.
-        for (int i = 0; i < new_id.length(); i++) {
-
-        }
-
-
-//        4단계 new_id에서 마침표(.)가 처음이나 끝에 위치한다면 제거합니다.
-
-
-//        5단계 new_id가 빈 문자열이라면, new_id에 "a"를 대입합니다.
-
-
-//        6단계 new_id의 길이가 16자 이상이면, new_id의 첫 15개의 문자를 제외한 나머지 문자들을 모두 제거합니다.
-
-//                만약 제거 후 마침표(.)가 new_id의 끝에 위치한다면 끝에 위치한 마침표(.) 문자를 제거합니다.
-
-
-//        7단계 new_id의 길이가 2자 이하라면, new_id의 마지막 문자를 new_id의 길이가 3이 될 때까지 반복해서 끝에 붙입니다.
-
+        int answer = Integer.parseInt(s);
 
         return answer;
-
     }
 
 

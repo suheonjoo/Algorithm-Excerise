@@ -1,0 +1,177 @@
+{\rtf1\ansi\ansicpg949\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset129 AppleSDGothicNeo-Regular;\f2\fmodern\fcharset0 Courier;
+\f3\fnil\fcharset0 Menlo-Regular;\f4\fmodern\fcharset0 Courier-Oblique;}
+{\colortbl;\red255\green255\blue255;\red191\green100\blue38;\red32\green32\blue32;\red153\green168\blue186;
+\red254\green187\blue91;\red86\green132\blue173;\red133\green96\blue154;\red109\green109\blue109;\red88\green118\blue71;
+}
+{\*\expandedcolortbl;;\csgenericrgb\c74902\c39216\c14902;\csgenericrgb\c12549\c12549\c12549;\csgenericrgb\c60000\c65882\c72941;
+\csgenericrgb\c99608\c73333\c35686;\csgenericrgb\c33725\c51765\c67843;\csgenericrgb\c52157\c37647\c60392;\csgenericrgb\c42745\c42745\c42745;\csgenericrgb\c34510\c46275\c27843;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14400\viewh10800\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs30 \cf0 \
+
+\f1 \'ba\'a3\'bd\'ba\'c6\'ae\'be\'d9\'b9\'fc
+\f0 \
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\fs26 \cf2 \cb3 public int\cf4 [] \cf5 Solution\cf4 (String[] genres\cf2 , int\cf4 [] plays) \{\
+\
+    HashMap<String\cf2 , \cf4 Integer> map = \cf2 new \cf4 HashMap<>()\cf2 ;\
+    for\cf4 (\cf2 int \cf4 i=\cf6 0\cf2 ; \cf4 i<genres.\cf7 length\cf2 ; \cf4 i++)\{\
+        map.put(genres[i]\cf2 , \cf4 map.getOrDefault(genres[i]\cf2 , \cf6 0\cf4 )+plays[i])\cf2 ;\
+    \cf4 \}\
+\
+    \cf8 // 1. 
+\f1 \'c0\'e5\'b8\'a3
+\f3  
+\f1 \'bc\'b1\'c1\'a4
+\f2   //
+\f1 \'bc\'d3\'c7\'d1
+\f3  
+\f1 \'b3\'eb\'b7\'a1\'b0\'a1
+\f3  
+\f1 \'b8\'b9\'c0\'cc
+\f3  
+\f1 \'c0\'e7\'bb\'fd\'b5\'c8
+\f3  
+\f1 \'c0\'e5\'b8\'a3\'b8\'a6
+\f3  
+\f1 \'b8\'d5\'c0\'fa
+\f3  
+\f1 \'bc\'f6\'b7\'cf\'c7\'d5\'b4\'cf\'b4\'d9
+\f2 .\
+    \cf4 ArrayList<String> genres_ordered = \cf2 new \cf4 ArrayList<>()\cf2 ;\
+    while\cf4 (map.size()!=\cf6 0\cf4 )\{\
+        \cf2 int \cf4 max = -\cf6 1\cf2 ;\
+        \cf4 String max_key = \cf9 ""\cf2 ;\
+        for\cf4 (String key : map.keySet())\{\
+            \cf2 int \cf4 tmp_cnt = map.get(key)\cf2 ;\
+            if\cf4 (tmp_cnt>max)\{\
+                max = tmp_cnt\cf2 ;\
+                \cf4 max_key = key\cf2 ;\
+            \cf4 \}\
+        \}\
+        genres_ordered.add(max_key)\cf2 ;\
+        \cf4 map.remove(max_key)\cf2 ;\
+    \cf4 \}\
+\
+    \cf8 // 2. 
+\f1 \'c0\'e5\'b8\'a3
+\f3  
+\f1 \'b3\'bb
+\f3  
+\f1 \'b3\'eb\'b7\'a1
+\f3  
+\f1 \'bc\'b1\'c1\'a4
+\f2  // 
+\f1 \'c0\'e5\'b8\'a3
+\f3  
+\f1 \'b3\'bb\'bf\'a1\'bc\'ad
+\f3  
+\f1 \'b8\'b9\'c0\'cc
+\f3  
+\f1 \'c0\'e7\'bb\'fd\'b5\'c8
+\f3  
+\f1 \'b3\'eb\'b7\'a1\'b8\'a6
+\f3  
+\f1 \'b8\'d5\'c0\'fa
+\f3  
+\f1 \'bc\'f6\'b7\'cf\'c7\'d5\'b4\'cf\'b4\'d9
+\f2 .\
+    \cf4 ArrayList<Music> result = \cf2 new \cf4 ArrayList<>()\cf2 ;\
+    for\cf4 (String gern : genres_ordered)\{\
+        ArrayList<Music> list = \cf2 new \cf4 ArrayList<>()\cf2 ;\
+        for\cf4 (\cf2 int \cf4 i=\cf6 0\cf2 ; \cf4 i<genres.\cf7 length\cf2 ; \cf4 i++)\{\
+            \cf2 if\cf4 (genres[i].equals(gern))\{\
+                list.add(\cf2 new \cf4 Music(gern\cf2 , \cf4 plays[i]\cf2 , \cf4 i))\cf2 ;\
+            \cf4 \}\
+        \}\
+        Collections.
+\f4\i sort
+\f2\i0 (list\cf2 , \cf4 (o1\cf2 , \cf4 o2) -> o2.\cf7 play \cf4 - o1.\cf7 play\cf4 )\cf2 ; \cf8 // 
+\f1 \'b3\'bb\'b8\'b2\'c2\'f7\'bc\'f8
+\f3  
+\f1 \'bc\'d2\'c6\'c3
+\f3 \
+        
+\f2 \cf4 result.add(list.get(\cf6 0\cf4 ))\cf2 ; 	\cf8 // 1
+\f1 \'b0\'b3\'b4\'c2
+\f3  
+\f1 \'b9\'ab\'c1\'b6\'b0\'c7
+\f3  
+\f1 \'bc\'f6\'b7\'cf
+\f3 \
+        
+\f2 \cf2 if\cf4 (list.size()!=\cf6 1\cf4 )\{ 	\cf8 // 
+\f1 \'b4\'f5
+\f3  
+\f1 \'bc\'f6\'b7\'cf\'c7\'d2
+\f3  
+\f1 \'b0\'ee\'c0\'cc
+\f3  
+\f1 \'c0\'d6\'c0\'b8\'b8\'e9
+\f2 (==
+\f1 \'c0\'e5\'b8\'a3
+\f3  
+\f1 \'b3\'bb\'c0\'c7
+\f3  
+\f1 \'b3\'eb\'b7\'a1\'b0\'a1
+\f2  1
+\f1 \'b0\'b3\'ba\'b8\'b4\'d9
+\f3  
+\f1 \'b8\'b9\'c0\'b8\'b8\'e9
+\f2 ) 
+\f1 \'bc\'f6\'b7\'cf
+\f3 \
+            
+\f2 \cf4 result.add(list.get(\cf6 1\cf4 ))\cf2 ;\
+        \cf4 \}\
+    \}\
+\
+    \cf8 // print result\
+    \cf2 int\cf4 [] answer = \cf2 new int\cf4 [result.size()]\cf2 ;\
+    for\cf4 (\cf2 int \cf4 i=\cf6 0\cf2 ; \cf4 i<result.size()\cf2 ; \cf4 i++)\{\
+        answer[i] = result.get(i).\cf7 idx\cf2 ;\
+    \cf4 \}\
+    \cf2 return \cf4 answer\cf2 ;\
+\
+\
+\cf4 \}\
+\
+\cf2 static class \cf4 Music\{\
+    String \cf7 genre\cf2 ;\
+    int \cf7 play\cf2 ;\
+    int \cf7 idx\cf2 ;\
+\
+    public \cf5 Music\cf4 (String genre\cf2 , int \cf4 play\cf2 , int \cf4 idx) \{\
+        \cf2 this\cf4 .\cf7 genre \cf4 = genre\cf2 ;\
+        this\cf4 .\cf7 play \cf4 = play\cf2 ;\
+        this\cf4 .\cf7 idx \cf4 = idx\cf2 ;\
+    \cf4 \}\
+\}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs30 \cf0 \cb1 \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}
