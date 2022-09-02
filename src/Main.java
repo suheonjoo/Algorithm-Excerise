@@ -70,10 +70,10 @@ class Solution {
             if (integerNumber == 2 || integerNumber == 5 || integerNumber == 8 || integerNumber == 0) {
 
                 //왼쪽꺼 선택해야함
-                if (Node.computeDistance(integerNodeMap, leftRecentString, rightRecentString, integerNumber.toString()) == 0) {
+                if (Node.computeDistance1(integerNodeMap, leftRecentString, rightRecentString, integerNumber.toString()) == 0) {
                     answer += "L";
                     leftRecentString = integerNumber.toString();
-                } else if (Node.computeDistance(integerNodeMap, leftRecentString, rightRecentString, integerNumber.toString()) == 1) {
+                } else if (Node.computeDistance1(integerNodeMap, leftRecentString, rightRecentString, integerNumber.toString()) == 1) {
                     answer += "R";
                     rightRecentString = integerNumber.toString();
                 } else {
@@ -103,6 +103,35 @@ class Solution {
         public Node(int x, int y) {
             this.x = x;
             this.y = y;
+        }
+
+        public static int computeDistance1(
+                Map<String, Node> integerNodeMap,
+                String leftRecentString,
+                String rightRecentString,
+                String numberString
+
+        ) {
+            Node leftNode = integerNodeMap.get(leftRecentString);
+            Node rightNode = integerNodeMap.get(rightRecentString);
+            Node standard = integerNodeMap.get(numberString);
+
+            int dx = Math.abs(leftNode.x - standard.x);
+            int dy = Math.abs(leftNode.y - standard.y);
+            double sumleft = dx + dy;
+
+            dx = Math.abs(rightNode.x - standard.x);
+            dy = Math.abs(rightNode.y - standard.y);
+            double sumright = dx + dy;
+
+            if (sumleft<sumright) {
+                return 0;
+            } else if (sumleft > sumright) {
+                return 1;
+            } else {
+                return 2;
+            }
+
         }
 
         public static int computeDistance(Map<String, Node> integerNodeMap,
