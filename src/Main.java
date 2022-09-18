@@ -1,22 +1,25 @@
+import package1.A;
 
+import javax.swing.plaf.IconUIResource;
+import java.util.*;
 import java.util.stream.Collectors;
 
-import java.util.*;
 
 public class Main { // 테스트 자바임
 
 
     public static void main(String[] args) {
+        System.out.println("Solution.solution() = " + Solution.solution(
+                new int[]{90, 0, 0, 95, 1, 1}
 
-        //String new_id = "=.=";
-        //1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5   right
-        //7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2  left
-        //1, 2, 3, 4, 5, 6, 7, 8, 9, 0      right
-        int[] numbers = new int[]{2,5,8,0};
-        String hand = "right";
 
-        System.out.println((Solution.solution(numbers,hand)));
+        ));
 
+//        System.out.println("Solution1.solution() = " + Solution1.solution(
+//
+//
+//        ));
+        Spliterator
 
     }
 }
@@ -25,150 +28,85 @@ public class Main { // 테스트 자바임
 class Solution {
 
 
-    public static String solution(int[] numbers, String hand) {
+    public static int solution(int[] money) {
+        int answer = 0;
 
 
+//        인덱스 0부터 시작하면 n-1개까지
+//        인덱스 1부터 시작하면 n까지 순회
+//
+//        dp[i+2] dp[i+3] 둘중에 큰값을 dp[i]에 더하기
 
-        List<Integer> integerList = Arrays.stream(numbers).boxed().collect(Collectors.toList());
+        int[] dp = new int[money.length];
+        //System.out.println("dp = " + Arrays.toString(dp));
 
-        String answer = "";
+        int max0 = money[0];
+        int max1 = money[1];
 
-        Map<String, Node> integerNodeMap = new HashMap<>();
-        integerNodeMap.put("1", new Node(1, 1));
-        integerNodeMap.put("2", new Node(1, 2));
-        integerNodeMap.put("3", new Node(1, 3));
+        if (money.length == 1) {
+            return money[0];
+        }
 
-        integerNodeMap.put("4", new Node(2, 1));
-        integerNodeMap.put("5", new Node(2, 2));
-        integerNodeMap.put("6", new Node(2, 3));
+        if (money.length==2) {
+            return Math.max(money[0],money[1]);
+        }
 
-        integerNodeMap.put("7", new Node(3, 1));
-        integerNodeMap.put("8", new Node(3, 2));
-        integerNodeMap.put("9", new Node(3, 3));
+        if (money.length == 3) {
 
-        integerNodeMap.put("*", new Node(4, 1));
-        integerNodeMap.put("0", new Node(4, 2));
-        integerNodeMap.put("#", new Node(4, 3));
+            return Math.max(money[2] ,Math.max(money[0] ,money[1]));
+        }
 
-        String leftRecentString = "*";
-        String rightRecentString = "#";
-        String numberString = "";
-
-
-
-        for (Integer integerNumber: integerList) {
-            if (integerNumber == 1 || integerNumber == 4 || integerNumber == 7) {
-                answer += "L";
-                leftRecentString = integerNumber.toString();
-            }
-
-            if (integerNumber == 3 || integerNumber == 6 || integerNumber == 9) {
-                answer += "R";
-                rightRecentString = integerNumber.toString();
-            }
-
-            if (integerNumber == 2 || integerNumber == 5 || integerNumber == 8 || integerNumber == 0) {
-
-                //왼쪽꺼 선택해야함
-                if (Node.computeDistance1(integerNodeMap, leftRecentString, rightRecentString, integerNumber.toString()) == 0) {
-                    answer += "L";
-                    leftRecentString = integerNumber.toString();
-                } else if (Node.computeDistance1(integerNodeMap, leftRecentString, rightRecentString, integerNumber.toString()) == 1) {
-                    answer += "R";
-                    rightRecentString = integerNumber.toString();
-                } else {
-                    if (hand.equals("right")) {     //여기서 equals 로 해야함 == 으로 하니깐 프로그램스 테스트 코드 통과를 못함
-                        answer += "R";
-                        rightRecentString = integerNumber.toString();
-                    } else if (hand.equals("left")) {
-                        answer += "L";
-                        leftRecentString = integerNumber.toString();
-                    }
-
-                }
-            }
+        if (money.length ==4) {
+            return Math.max(money[0]+money[2], money[1]+money[3]);
         }
 
 
-        return answer;
-    }
+        dp[0]= money[0];
+        dp[1]= Integer.MIN_VALUE;
 
+        dp[2]= Math.max(money[2] ,Math.max( money[0], dp[1]));
+        dp[3]= Math.max(money[0]+money[2], dp[1]+money[3]);
 
+        //0   1  2   3  4  5
+        //90, 0, 0, 95, 1, 1
 
+        //0부터 시작
+        for (int i = 4; i  < money.length-1; i++) {
 
-    static class Node {
+            dp[i] = Math.max( Math.max(money[i-1] + dp[i-3], money[i-1] + dp[i-4]), Math.max(dp[i - 2] + money[i] , dp[i - 3]+ money[i]));
 
-        int x, y;
-
-        public Node(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        public static int computeDistance1(
-                Map<String, Node> integerNodeMap,
-                String leftRecentString,
-                String rightRecentString,
-                String numberString
-
-        ) {
-            Node leftNode = integerNodeMap.get(leftRecentString);
-            Node rightNode = integerNodeMap.get(rightRecentString);
-            Node standard = integerNodeMap.get(numberString);
-
-            int dx = Math.abs(leftNode.x - standard.x);
-            int dy = Math.abs(leftNode.y - standard.y);
-            double sumleft = dx + dy;
-
-            dx = Math.abs(rightNode.x - standard.x);
-            dy = Math.abs(rightNode.y - standard.y);
-            double sumright = dx + dy;
-
-            if (sumleft<sumright) {
-                return 0;
-            } else if (sumleft > sumright) {
-                return 1;
-            } else {
-                return 2;
-            }
 
         }
+        max0 = Math.max(dp[money.length-2], dp[money.length-3]);
 
-        public static int computeDistance(Map<String, Node> integerNodeMap,
-                                           String leftRecentString,
-                                           String rightRecentString,
-                                           String numberString) {
+        //System.out.println("Arrays.toString(dp) = " + Arrays.toString(dp));
 
 
-            Node leftNode = integerNodeMap.get(leftRecentString);
-            Node rightNode = integerNodeMap.get(rightRecentString);
-            Node standard = integerNodeMap.get(numberString);
+        dp[0]= Integer.MIN_VALUE;
+        dp[1]= money[1];
+        dp[2]= Math.max(money[2] ,Math.max( dp[0], money[1]));
+        dp[3]= Math.max(dp[0]+money[2], money[1]+money[3]);
 
-            double xpow = Math.pow(Math.abs(leftNode.x - standard.x), 2);
-            double ypow = Math.pow(Math.abs(leftNode.y - standard.y), 2);
-            double sumleft = xpow + ypow;
 
-            xpow = Math.pow(Math.abs(rightNode.x - standard.x), 2);
-            ypow = Math.pow(Math.abs(rightNode.y - standard.y), 2);
-
-            double sumright = xpow + ypow;
-
-            if (sumleft<sumright) {
-                return 0;
-            } else if (sumleft > sumright) {
-                return 1;
-            } else {
-                return 2;
-            }
-
+        //1부터 시작
+        for (int i = 4; i  < money.length; i++) {
+            dp[i] = Math.max( Math.max(money[i-1] + dp[i-3], money[i-1] + dp[i-4]), Math.max(dp[i - 2] + money[i] , dp[i - 3]+ money[i]));
         }
+        max1 = Math.max(dp[money.length-1], dp[money.length-2]);
+
+        //System.out.println("11Arrays.toString(dp) = " + Arrays.toString(dp));
 
 
 
+
+        return Math.max(max0,max1);
     }
 
 
 }
+
+
+
 
 
 
